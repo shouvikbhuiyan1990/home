@@ -1,0 +1,32 @@
+html
+  head
+    title Home
+    link(rel='stylesheet', href='/stylesheets/reset.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    .container(ng-app='homeCalc', ng-controller='homeCalcCtrl')
+      h1 Sharing Calculation App
+      button.btn.btn-default(ng-click='addMoreRecords()') Add More
+      button.btn.btn-default(ng-click='generateExpenseReport()') Generate Expense Report
+      .row
+        .col-md-3
+          h4 Name
+        .col-md-3
+          h4 Spent Till Now
+        .col-md-3
+          h4 Add Amount
+      ul
+        li(ng-repeat='rec in record')
+          .rec-sec(person-record='', id='{{rec._id}}')
+      ul
+        li(ng-repeat='pay in payableArr track by $index')
+          strong {{pay.payee}}
+          |  pays 
+          strong {{pay.payable}}
+          span(ng-show="pay.payer!=''")
+            | to 
+            strong {{pay.payer}}
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='/javascripts/angular.min.js')
+    script(src='/javascripts/main.js')

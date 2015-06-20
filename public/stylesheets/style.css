@@ -1,0 +1,9 @@
+/* line 2, ../sass/style.scss */
+.rec-sec input {
+  padding: 10px;
+  margin: 10px 0;
+}
+/* line 6, ../sass/style.scss */
+.rec-sec .col-form-btn {
+  padding-top: 15px;
+}

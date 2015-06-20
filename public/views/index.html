@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title>Home</title>
+	<link rel='stylesheet' href='/stylesheets/reset.css' />
+	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<div class="container" ng-app="homeCalc" ng-controller="homeCalcCtrl">
+		<h1>Sharing Calculation App</h1>
+		<button class="btn btn-default" ng-click="addMoreRecords()">Add More</button>
+		<button class="btn btn-default" ng-click="generateExpenseReport()">Generate Expense Report</button>
+		<div class="row">
+			<div class="col-md-3"><h4>Name</h4></div>
+			<div class="col-md-3"><h4>Spent Till Now</h4></div>
+			<div class="col-md-3"><h4>Add Amount</h4></div>
+		</div>
+		<ul>
+			<li ng-repeat="rec in record">
+				<div class="rec-sec" person-record id="{{rec._id}}"></div>
+			</li>
+		</ul>
+		<ul>
+			<li ng-repeat="pay in payableArr track by $index"><strong>{{pay.payee}}</strong> pays <strong>{{pay.payable}}</strong> <span ng-show="pay.payer!=''">to <strong>{{pay.payer}}</strong></span></li>
+		</ul>
+	</div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <script src='/javascripts/angular.min.js'></script>
+    <script src='/javascripts/main.js'></script>
+</body>
+</html>
