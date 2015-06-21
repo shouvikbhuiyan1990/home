@@ -1,6 +1,6 @@
 html
   head
-    title Home
+    title Share Your Money
     link(rel='stylesheet', href='/stylesheets/reset.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -11,9 +11,9 @@ html
         .btn-group(role='group')
           button.btn.btn-default(ng-click='addMoreRecords()', ng-disabled='noRrecords') Add More
         .btn-group(role='group')
-          button.btn.btn-default(ng-click='generateExpenseReport()') Generate Expense Report
+          button.btn.btn-default(ng-click='generateExpenseReport()', ng-disabled='noRrecords') Generate Expense Report
         .btn-group(role='group')
-          button.btn.btn-default(ng-click='deleteAll()') Delete All
+          button.btn.btn-default(ng-click='deleteAll()', ng-disabled='noRrecords') Delete All
       .no-records(ng-show='noRrecords')
         p
           | No Records Found. Please click  

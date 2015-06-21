@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Home</title>
+	<title>Share Your Money</title>
 	<link rel='stylesheet' href='/stylesheets/reset.css' />
 	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
 	<link rel='stylesheet' href='/stylesheets/style.css' />
@@ -13,10 +13,10 @@
 		    <button class="btn btn-default" ng-click="addMoreRecords()" ng-disabled="noRrecords">Add More</button>
 		  </div>
 		  <div class="btn-group" role="group">
-		    <button class="btn btn-default" ng-click="generateExpenseReport()">Generate Expense Report</button>
+		    <button class="btn btn-default" ng-click="generateExpenseReport()" ng-disabled="noRrecords">Generate Expense Report</button>
 		  </div>
 		  <div class="btn-group" role="group">
-		  	<button class="btn btn-default" ng-click="deleteAll()">Delete All</button>
+		  	<button class="btn btn-default" ng-click="deleteAll()" ng-disabled="noRrecords">Delete All</button>
 		  </div>
 		</div>
 		
