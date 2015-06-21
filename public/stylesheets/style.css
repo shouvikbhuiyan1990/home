@@ -35,8 +35,19 @@
 .expense-report {
   margin-top: 25px;
 }
+/* line 38, ../sass/style.scss */
+.expense-report table th {
+  border: 1px solid #ccc;
+  text-align: center;
+  font-weight: bold;
+}
+/* line 43, ../sass/style.scss */
+.expense-report table td {
+  border: 1px solid #ccc;
+  text-align: center;
+}
 
-/* line 39, ../sass/style.scss */
+/* line 50, ../sass/style.scss */
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -46,18 +57,18 @@
   height: 0;
 }
 
-/* line 47, ../sass/style.scss */
+/* line 58, ../sass/style.scss */
 .clearfix {
   display: inline-block;
 }
 
 /* start commented backslash hack \*/
-/* line 49, ../sass/style.scss */
+/* line 60, ../sass/style.scss */
 * html .clearfix {
   height: 1%;
 }
 
-/* line 50, ../sass/style.scss */
+/* line 61, ../sass/style.scss */
 .clearfix {
   display: block;
 }

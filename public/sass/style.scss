@@ -34,6 +34,17 @@
 	}
 	.expense-report{
 		margin-top : 25px;
+		table{
+			th{
+				border : 1px solid #ccc;
+				text-align: center;
+				font-weight : bold;
+			}
+			td{
+				border : 1px solid #ccc;
+				text-align: center;
+			}
+		}
 	}
 
 .clearfix:after {
