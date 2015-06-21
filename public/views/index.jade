@@ -24,7 +24,14 @@ html
       ul
         li(ng-repeat='rec in record')
           .rec-sec(person-record='', id='{{rec._id}}')
-      .panel.panel-default(ng-show='showCalculation')
+      .btn-group(role='group', aria-label='...')
+        .btn-group(role='group')
+          button.btn.btn-default(ng-click='addMoreRecords()') Add More
+        .btn-group(role='group')
+          button.btn.btn-default(ng-click='generateExpenseReport()') Generate Expense Report
+        .btn-group(role='group')
+          button.btn.btn-default(ng-click='deleteAll()') Delete All
+      .panel.panel-default.expense-report(ng-show='showCalculation')
         .panel-heading Payables
         table.table
           tr

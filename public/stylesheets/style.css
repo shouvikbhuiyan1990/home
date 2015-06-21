@@ -26,7 +26,12 @@
   margin: 0;
 }
 
-/* line 33, ../sass/style.scss */
+/* line 32, ../sass/style.scss */
+.expense-report {
+  margin-top: 25px;
+}
+
+/* line 36, ../sass/style.scss */
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -36,18 +41,18 @@
   height: 0;
 }
 
-/* line 41, ../sass/style.scss */
+/* line 44, ../sass/style.scss */
 .clearfix {
   display: inline-block;
 }
 
 /* start commented backslash hack \*/
-/* line 43, ../sass/style.scss */
+/* line 46, ../sass/style.scss */
 * html .clearfix {
   height: 1%;
 }
 
-/* line 44, ../sass/style.scss */
+/* line 47, ../sass/style.scss */
 .clearfix {
   display: block;
 }
