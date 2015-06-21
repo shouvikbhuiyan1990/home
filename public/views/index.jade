@@ -7,26 +7,35 @@ html
   body
     .container(ng-app='homeCalc', ng-controller='homeCalcCtrl')
       h1 Sharing Calculation App
-      button.btn.btn-default(ng-click='addMoreRecords()') Add More
-      button.btn.btn-default(ng-click='generateExpenseReport()') Generate Expense Report
+      .btn-group(role='group', aria-label='...')
+        .btn-group(role='group')
+          button.btn.btn-default(ng-click='addMoreRecords()') Add More
+        .btn-group(role='group')
+          button.btn.btn-default(ng-click='generateExpenseReport()') Generate Expense Report
+        .btn-group(role='group')
+          button.btn.btn-default(ng-click='deleteAll()') Delete All
       .row
         .col-md-3
           h4 Name
         .col-md-3
           h4 Spent Till Now
         .col-md-3
-          h4 Add Amount
+          h4 Add/Delete Amount
       ul
         li(ng-repeat='rec in record')
           .rec-sec(person-record='', id='{{rec._id}}')
-      ul
-        li(ng-repeat='pay in payableArr track by $index')
-          strong {{pay.payer}}
-          |  pays 
-          strong {{pay.payable}} 
-          span(ng-show="pay.payee!=''")
-            | to 
-            strong {{pay.payee}}
+      .panel.panel-default(ng-show='showCalculation')
+        .panel-heading Payables
+        table.table
+          tr
+            th Payer
+            th Payee
+            th Payable
+          tr(ng-repeat='pay in payableArr track by $index')
+            td {{pay.payer}}
+            td {{pay.payee}}
+            td {{pay.payable}}
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(src='/javascripts/angular.min.js')
     script(src='/javascripts/main.js')
+    script(src='/javascripts/bootstrap.min.js')

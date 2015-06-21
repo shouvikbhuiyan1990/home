@@ -4,6 +4,42 @@
 		margin : 10px 0;
 	}
 	.col-form-btn{
-		padding-top :15px;
+		padding-top :5px;
+		button{
+			&:first-child{
+				margin-right : 12px;
+			}
+		}
+	}
+	.record-display{
+		.input-grp{
+			select{
+				width : 30%;
+				float : left;
+				padding : 12px 8px;
+				border-right : none;
+				cursor : pointer;
+			}
+			input{
+				width : 70%;
+				float : left;
+				margin : 0;
+			}
+		}
 	}
 }
+
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */

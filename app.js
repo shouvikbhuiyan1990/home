@@ -66,6 +66,21 @@ app.post('/homecalc/record/findone',function(req,res){
   });
 });
 
+//deleteAll Records
+app.post('/homecalc/record/delete/all',function(req,res){
+  if(req.body.id){
+    db.homecalc.remove({_id:mongojs.ObjectId(req.body.id)},function(err,doc){
+      res.send(doc);
+    })
+  }
+  else{
+    db.homecalc.remove({},function(err,doc){
+      res.send(doc);
+    })
+  }
+  
+})
+
 // catch 404 and forward to error handler
 
 

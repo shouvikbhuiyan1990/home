@@ -26,6 +26,13 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 		takeArr.length = 0;
 		giveArr.length = 0;
 		$scope.payableArr.length = 0;
+		$scope.showCalculation = true;
+	};
+
+	$scope.deleteAll = function(){
+		$http.post('/homecalc/record/delete/all',{}).success(function(data){
+			dataFactory.updateView();
+		});
 	};
 
 	$scope.$on('/homecalc/update/view',function(e,data){
@@ -99,11 +106,24 @@ app.directive('personRecord',['$http','dataFactory',function(http,dataFactory){
 		templateUrl : 'views/template.html',
 		link : function(scope,ele,attr){
 			var reqObjct = {};
+			var deleteObj = {};
+			ele.find('.btn-delete').bind('click',function(e){
+				e.preventDefault();
+				deleteObj.id = attr.id;
+				http.post('/homecalc/record/delete/all',deleteObj).success(function(data){
+					dataFactory.updateView();
+				});
+			})
 			ele.bind('submit',function(){
 				reqObjct.id = attr.id;
 				reqObjct.name = scope.name;
 				http.post('/homecalc/record/findone',reqObjct).success(function(data){
-					reqObjct.amount = parseInt(scope.amount) + parseInt(data.total);
+					if(scope.amountOption == 'add'){
+						reqObjct.amount = parseInt(scope.amount) + parseInt(data.total);
+					}
+					else{
+						reqObjct.amount = parseInt(data.total) - parseInt(scope.amount);
+					}
 					http.post('/homecalc/record/update',reqObjct).success(function(innerData){
 						dataFactory.updateView();
 					})
