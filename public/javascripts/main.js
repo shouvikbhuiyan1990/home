@@ -59,21 +59,19 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 				var maxTake = this.selectMax(takeArr).index;
 				var maxGive = this.selectMax(giveArr).index;
 				var remain = 2;
-				if(takeArr[maxTake].total > giveArr[maxGive].total){
-					while(takeArr[maxTake].total > 0 && remain>0){
-						maxGive = this.selectMax(giveArr).index;
-						remain = takeArr[maxTake].total - giveArr[maxGive].total;
-						
-						if(remain < 0){
-							$scope.payableArr.push({payee:takeArr[maxTake].name,payable:takeArr[maxTake].total,payer:giveArr[maxGive].name});
-							giveArr[maxGive].total = giveArr[maxGive].total - takeArr[maxTake].total;
-							takeArr.splice(maxTake,1);
-						}
-						else{
-							$scope.payableArr.push({payee:takeArr[maxTake].name,payable:giveArr[maxGive].total,payer:giveArr[maxGive].name});
-							takeArr[maxTake].total = takeArr[maxTake].total - giveArr[maxGive].total;
-							giveArr.splice(maxGive,1);
-						}
+				while(takeArr[maxTake] && takeArr[maxTake].total > 0 && remain>0){
+					maxGive = this.selectMax(giveArr).index;
+					remain = takeArr[maxTake].total - giveArr[maxGive].total;
+					
+					if(remain < 0){
+						$scope.payableArr.push({payee:takeArr[maxTake].name,payable:takeArr[maxTake].total,payer:giveArr[maxGive].name});
+						giveArr[maxGive].total = giveArr[maxGive].total - takeArr[maxTake].total;
+						takeArr.splice(maxTake,1);
+					}
+					else{
+						$scope.payableArr.push({payee:takeArr[maxTake].name,payable:giveArr[maxGive].total,payer:giveArr[maxGive].name});
+						takeArr[maxTake].total = takeArr[maxTake].total - giveArr[maxGive].total;
+						giveArr.splice(maxGive,1);
 					}
 				}
 			}

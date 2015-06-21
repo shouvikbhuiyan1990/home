@@ -21,7 +21,7 @@
 			</li>
 		</ul>
 		<ul>
-			<li ng-repeat="pay in payableArr track by $index"><strong>{{pay.payee}}</strong> pays <strong>{{pay.payable}}</strong> <span ng-show="pay.payer!=''">to <strong>{{pay.payer}}</strong></span></li>
+			<li ng-repeat="pay in payableArr track by $index"><strong>{{pay.payer}}</strong> pays <strong>{{pay.payable}}</strong> <span ng-show="pay.payee!=''"> to <strong>{{pay.payee}}</strong></span></li>
 		</ul>
 	</div>
 

@@ -21,12 +21,12 @@ html
           .rec-sec(person-record='', id='{{rec._id}}')
       ul
         li(ng-repeat='pay in payableArr track by $index')
-          strong {{pay.payee}}
+          strong {{pay.payer}}
           |  pays 
-          strong {{pay.payable}}
-          span(ng-show="pay.payer!=''")
+          strong {{pay.payable}} 
+          span(ng-show="pay.payee!=''")
             | to 
-            strong {{pay.payer}}
+            strong {{pay.payee}}
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(src='/javascripts/angular.min.js')
     script(src='/javascripts/main.js')
