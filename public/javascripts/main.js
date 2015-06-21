@@ -5,6 +5,8 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 
 	$scope.payableArr = [];
 
+	var giveArr =[], takeArr = [];
+
 	$http.get('/homecalc/find/all').success(function(data){
 		$scope.record = data;
 	})
@@ -21,6 +23,9 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 		$http.get('/homecalc/find/all').success(function(data){
 			modularFunctionality.splitArr(data);
 		});
+		takeArr.length = 0;
+		giveArr.length = 0;
+		$scope.payableArr.length = 0;
 	};
 
 	$scope.$on('/homecalc/update/view',function(e,data){
@@ -28,12 +33,6 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 	});
 
 	var modularFunctionality = {
-		sortData : function(data){
-			data.map(function(value,index){
-				var maxEleIndex = this.selectMax(data);
-			})
-			
-		},
 		splitArr : function(data){
 			var maxValue 
 			    ,total = 0
@@ -44,11 +43,40 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 			avg = total/data.length;
 			data.map(function(value,index){
 				if(value.total === avg){
-					//payableObj.payee = value.name;
-					//payableObj.payable = 0;
 					$scope.payableArr.push({payee:value.name,payable:0,payer:''});
 				}
-			})
+				else if(value.total > avg){
+					value.total = value.total-avg;
+					takeArr.push(value);
+				}
+				else{
+					value.total = avg - value.total;
+					giveArr.push(value);
+				}
+			});
+			var j = takeArr.length;
+			for(var i=0; i<j ;i++){
+				var maxTake = this.selectMax(takeArr).index;
+				var maxGive = this.selectMax(giveArr).index;
+				var remain = 2;
+				if(takeArr[maxTake].total > giveArr[maxGive].total){
+					while(takeArr[maxTake].total > 0 && remain>0){
+						maxGive = this.selectMax(giveArr).index;
+						remain = takeArr[maxTake].total - giveArr[maxGive].total;
+						
+						if(remain < 0){
+							$scope.payableArr.push({payee:takeArr[maxTake].name,payable:takeArr[maxTake].total,payer:giveArr[maxGive].name});
+							giveArr[maxGive].total = giveArr[maxGive].total - takeArr[maxTake].total;
+							takeArr.splice(maxTake,1);
+						}
+						else{
+							$scope.payableArr.push({payee:takeArr[maxTake].name,payable:giveArr[maxGive].total,payer:giveArr[maxGive].name});
+							takeArr[maxTake].total = takeArr[maxTake].total - giveArr[maxGive].total;
+							giveArr.splice(maxGive,1);
+						}
+					}
+				}
+			}
 		},
 		selectMax : function(data){
 			var maxValue = data[0].total;
@@ -58,6 +86,8 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 					maxValue = value.total;
 					maxIndex = index;
 				}
+				else
+					maxIndex = 0;
 			});
 			return { 'index' : maxIndex , 'value' : maxValue};
 		}
