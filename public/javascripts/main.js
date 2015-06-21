@@ -9,10 +9,16 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 
 	$http.get('/homecalc/find/all').success(function(data){
 		$scope.record = data;
+		if(data.length == 0){
+			$rootScope.$broadcast('/homecalc/update/noRrecord',{})
+		}
+		else
+			$scope.noRrecords = false;
 	})
 
 	$scope.addMoreRecords = function(){
 		var newRecord = {name:'',total:0,amount:0};
+		$scope.noRrecords = false;
 		//$scope.record.push(newRecord);
 		$http.post('/homecalc/record/add',newRecord).success(function(data){
 			dataFactory.updateView();
@@ -32,11 +38,16 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 	$scope.deleteAll = function(){
 		$http.post('/homecalc/record/delete/all',{}).success(function(data){
 			dataFactory.updateView();
+			$rootScope.$broadcast('/homecalc/update/noRrecord',{})
 		});
 	};
 
 	$scope.$on('/homecalc/update/view',function(e,data){
 		$scope.record = data;
+	});
+
+	$scope.$on('/homecalc/update/noRrecord',function(e,data){
+		$scope.noRrecords = true;
 	});
 
 	var modularFunctionality = {
@@ -100,7 +111,7 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 
 }]);
 
-app.directive('personRecord',['$http','dataFactory',function(http,dataFactory){
+app.directive('personRecord',['$http','$rootScope','dataFactory',function(http,rootScope,dataFactory){
 	return{
 		restrict : 'AE',
 		templateUrl : 'views/template.html',
@@ -112,6 +123,11 @@ app.directive('personRecord',['$http','dataFactory',function(http,dataFactory){
 				deleteObj.id = attr.id;
 				http.post('/homecalc/record/delete/all',deleteObj).success(function(data){
 					dataFactory.updateView();
+					http.get('/homecalc/find/all').success(function(Recdata){
+						if(Recdata.length == 0){
+							rootScope.$broadcast('/homecalc/update/noRrecord',{})
+						}
+					});
 				});
 			})
 			ele.bind('submit',function(){
