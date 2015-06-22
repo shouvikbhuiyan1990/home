@@ -19,9 +19,10 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 	$scope.addMoreRecords = function(){
 		var newRecord = {name:'',total:0,amount:0,newRecord:true};
 		$scope.noRrecords = false;
+		$scope.showCalculation = false;
 		//$scope.record.push(newRecord);
 		$http.post('/homecalc/record/add',newRecord).success(function(data){
-			dataFactory.updateView();
+			dataFactory.updateViewAll();
 		})
 	};
 
@@ -43,6 +44,10 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 	};
 
 	$scope.$on('/homecalc/update/view',function(e,data){
+		$scope.record = data;
+	});
+
+	$scope.$on('/homecalc/update/viewAll',function(e,data){
 		$scope.record = data;
 	});
 
@@ -167,6 +172,11 @@ app.factory('dataFactory',['$rootScope','$http',function($rootScope,$http){
 		updateView : function(){
 				$http.get('/homecalc/find/all').success(function(data){
 				$rootScope.$broadcast('/homecalc/update/view',data);
+			});
+		},
+		updateViewAll : function(){
+			$http.get('/homecalc/find/all/space').success(function(data){
+				$rootScope.$broadcast('/homecalc/update/viewAll',data);
 			});
 		}
 	}

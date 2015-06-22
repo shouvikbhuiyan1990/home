@@ -35,14 +35,44 @@ var db = mongojs('test',['homecalc']);
 
 //find all existing record
 app.get('/homecalc/find/all',function(req,res){
+  var sendArr = [];
   db.homecalc.find(function(err,doc){
-    res.send(doc);
+    doc.forEach(function(record){
+      if(record.name!=''){
+        sendArr.push(record);
+      }
+    })
+    res.send(sendArr);
+  })
+});
+
+app.get('/homecalc/find/all/space',function(req,res){
+  var sendArr = [];
+  db.homecalc.find(function(err,doc){
+      res.send(doc);
   })
 });
 
 //add record
 app.post('/homecalc/record/add',function(req,res){
-  console.log('This is fuakiing imp'  + req.body  + 'End of Fouaking imp');
+  var sendArr = [];
+  db.homecalc.find(function(err,doc){
+    doc.forEach(function(entry){
+      if(entry.name == ''){
+        sendArr.push(entry);
+      }
+      //console.log('hahaha' + entry);
+    });
+    //console.log('hahaha' + sendArr);
+    //debugger;
+    for(var i=0; i<sendArr.length ; i++){
+      //console.log('id is' + sendArr[i]._id);
+      db.homecalc.remove({_id : mongojs.ObjectId(sendArr[i]._id)},function(err,doc){
+        
+      })
+    }
+  })
+  //console.log('This is fuakiing imp'  + req.body  + 'End of Fouaking imp');
   res.send(req.body);
   db.homecalc.save(req.body);
 });
