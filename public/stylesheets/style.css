@@ -26,28 +26,35 @@
   margin: 0;
 }
 
-/* line 32, ../sass/style.scss */
+/* line 31, ../sass/style.scss */
+.error {
+  padding: 22px 0;
+  color: red;
+  font-size: 18px;
+}
+
+/* line 37, ../sass/style.scss */
 .no-records {
   padding: 40px 0;
 }
 
-/* line 35, ../sass/style.scss */
+/* line 40, ../sass/style.scss */
 .expense-report {
   margin-top: 25px;
 }
-/* line 38, ../sass/style.scss */
+/* line 43, ../sass/style.scss */
 .expense-report table th {
   border: 1px solid #ccc;
   text-align: center;
   font-weight: bold;
 }
-/* line 43, ../sass/style.scss */
+/* line 48, ../sass/style.scss */
 .expense-report table td {
   border: 1px solid #ccc;
   text-align: center;
 }
 
-/* line 50, ../sass/style.scss */
+/* line 55, ../sass/style.scss */
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -57,18 +64,18 @@
   height: 0;
 }
 
-/* line 58, ../sass/style.scss */
+/* line 63, ../sass/style.scss */
 .clearfix {
   display: inline-block;
 }
 
 /* start commented backslash hack \*/
-/* line 60, ../sass/style.scss */
+/* line 65, ../sass/style.scss */
 * html .clearfix {
   height: 1%;
 }
 
-/* line 61, ../sass/style.scss */
+/* line 66, ../sass/style.scss */
 .clearfix {
   display: block;
 }

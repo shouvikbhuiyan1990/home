@@ -36,6 +36,7 @@
 					<div class="rec-sec" person-record id="{{rec._id}}"></div>
 				</li>
 			</ul>
+			<div class="error" ng-show="errDisplay"><p>Name already Exists add Another name</p></div>
 			<div class="btn-group" role="group" aria-label="...">
 			  <div class="btn-group" role="group">
 			    <button class="btn btn-default" ng-click="addMoreRecords()">Add More</button>
@@ -62,6 +63,7 @@
 			    </tr>
 			  </table>
 			</div>
+
 		</div>
 	</div>
 

@@ -17,7 +17,7 @@ app.controller('homeCalcCtrl',['$scope','$http','$rootScope','dataFactory',funct
 	})
 
 	$scope.addMoreRecords = function(){
-		var newRecord = {name:'',total:0,amount:0};
+		var newRecord = {name:'',total:0,amount:0,newRecord:true};
 		$scope.noRrecords = false;
 		//$scope.record.push(newRecord);
 		$http.post('/homecalc/record/add',newRecord).success(function(data){
@@ -131,18 +131,28 @@ app.directive('personRecord',['$http','$rootScope','dataFactory',function(http,r
 				});
 			})
 			ele.bind('submit',function(){
+				scope.errDisplay = true;
 				reqObjct.id = attr.id;
 				reqObjct.name = scope.name;
+				var nameObj = {};
+				nameObj.name = scope.name;
 				http.post('/homecalc/record/findone',reqObjct).success(function(data){
-					if(scope.amountOption == 'add'){
-						reqObjct.amount = parseInt(scope.amount) + parseInt(data.total);
-					}
-					else{
-						reqObjct.amount = parseInt(data.total) - parseInt(scope.amount);
-					}
-					http.post('/homecalc/record/update',reqObjct).success(function(innerData){
-						dataFactory.updateView();
-					})
+					http.post('/homecalc/record/findDuplictae',nameObj).success(function(nameData){
+						if(data.newRecord == false ||  nameData.length == 0){							
+							if(scope.amountOption == 'add'){
+								reqObjct.amount = parseInt(scope.amount) + parseInt(data.total);
+							}
+							else{
+								reqObjct.amount = parseInt(data.total) - parseInt(scope.amount);
+							}
+							http.post('/homecalc/record/update',reqObjct).success(function(innerData){
+								dataFactory.updateView();
+							})
+						}
+						else{
+							scope.$parent.errDisplay = true;
+						}
+					});
 				})
 				
 				

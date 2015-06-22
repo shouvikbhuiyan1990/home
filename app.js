@@ -51,7 +51,7 @@ app.post('/homecalc/record/add',function(req,res){
 app.post('/homecalc/record/update',function(req,res){
   db.homecalc.findAndModify({
     query : { _id : mongojs.ObjectId(req.body.id) },
-    update : { $set : {name:req.body.name,total:req.body.amount} }
+    update : { $set : {name:req.body.name,total:req.body.amount,newRecord:false} }
   },function(err,doc){
     res.send(doc)
   })
@@ -61,6 +61,14 @@ app.post('/homecalc/record/update',function(req,res){
 app.post('/homecalc/record/findone',function(req,res){
   db.homecalc.findOne({
     _id : mongojs.ObjectId(req.body.id)
+  },function(err,doc){
+    res.send(doc);
+  });
+});
+
+app.post('/homecalc/record/findDuplictae',function(req,res){
+  db.homecalc.findOne({
+    name : req.body.name
   },function(err,doc){
     res.send(doc);
   });
