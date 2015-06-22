@@ -30,6 +30,8 @@ html
         ul
           li(ng-repeat='rec in record')
             .rec-sec(person-record='', id='{{rec._id}}')
+        .error(ng-show='errDisplay')
+          p Name already Exists add Another name
         .btn-group(role='group', aria-label='...')
           .btn-group(role='group')
             button.btn.btn-default(ng-click='addMoreRecords()') Add More
@@ -48,9 +50,6 @@ html
               td {{pay.payer}}
               td {{pay.payee}}
               td {{pay.payable}}
-        .error(ng-show='errDisplay')
-          p Name already Exists add Another name
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(src='/javascripts/angular.min.js')
     script(src='/javascripts/main.js')
-    script(src='/javascripts/bootstrap.min.js')

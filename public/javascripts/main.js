@@ -155,6 +155,8 @@ app.directive('personRecord',['$http','$rootScope','dataFactory',function(http,r
 							})
 						}
 						else{
+							scope.name = '';
+							scope.amount = '';
 							scope.$parent.errDisplay = true;
 						}
 					});
